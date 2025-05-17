@@ -1,6 +1,6 @@
 <?php
 
-class ExperienciaProfissional
+class ExperienciaProf
 {
     private $id;
     private $idusuario;
@@ -8,9 +8,6 @@ class ExperienciaProfissional
     private $fim;
     private $empresa;
     private $descricao;
-
-
-
 
     //ID
     public function setID($id)
@@ -22,8 +19,6 @@ class ExperienciaProfissional
         return $this->id;
     }
 
-
-
     //idusuario
     public function setIdUsuario($idusuario)
     {
@@ -34,8 +29,6 @@ class ExperienciaProfissional
         return $this->idusuario;
     }
 
-
-
     //inicio
     public function setInicio($inicio)
     {
@@ -45,8 +38,6 @@ class ExperienciaProfissional
     {
         return $this->inicio;
     }
-
-
 
     //fim
     public function setFim($fim)
@@ -78,10 +69,6 @@ class ExperienciaProfissional
         return $this->descricao;
     }
 
-
-
-
-
     public function inserirBD()
     {
         require_once 'ConexaoBD.php';
@@ -105,10 +92,6 @@ class ExperienciaProfissional
         }
     }
 
-
-
-
-
     public function excluirBD($id)
     {
         require_once 'ConexaoBD.php';
@@ -118,9 +101,7 @@ class ExperienciaProfissional
             die("Connection failed: " . $conn->connect_error);
         }
 
-
         $sql = "DELETE FROM experienciaprofissional WHERE idexperienciaprofissional = '" . $id . "';";
-
 
         if ($conn->query($sql) === true) {
             $conn->close();
@@ -131,7 +112,6 @@ class ExperienciaProfissional
         }
     }
 
-
     public function listaExperiencias($idusuario)
     {
         require_once 'ConexaoBD.php';
@@ -141,7 +121,6 @@ class ExperienciaProfissional
             die("Connection failed: " . $conn->connect_error);
         }
 
-
         $sql = "SELECT * FROM experienciaprofissional WHERE idusuario = '" . $idusuario . "'";
        
        // essa linha de verificação é diferente das outras
@@ -149,13 +128,5 @@ class ExperienciaProfissional
         $conn->close();
         return $re;
     }
-
-
-
-
-
-
-
-
 
 }

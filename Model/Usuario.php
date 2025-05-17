@@ -9,9 +9,6 @@ class Usuario
     private $dataNascimento;
     private $senha;
 
-
-
-
     // atributos da classe
 
     //ID
@@ -24,7 +21,6 @@ class Usuario
         return $this->id;
     }
 
-
     //Nome
     public function setNome($nome)
     {
@@ -34,7 +30,6 @@ class Usuario
     {
         return $this->nome;
     }
-
 
     //CPF
     public function setCPF($cpf)
@@ -46,7 +41,6 @@ class Usuario
         return $this->cpf;
     }
 
-
     //Email
     public function setEmail($email)
     {
@@ -56,7 +50,6 @@ class Usuario
     {
         return $this->email;
     }
-
 
     //Data de nascimento
     public function setDataNascimento($dataNascimento)
@@ -68,7 +61,6 @@ class Usuario
         return $this->dataNascimento;
     }
 
-
     // Senha
     public function setSenha($senha)
     {
@@ -79,14 +71,7 @@ class Usuario
         return $this->senha;
     }
 
-
-
-
-
-
-
     //Métodos da classe
-
     public function inserirBD()
     {
         require_once 'ConexaoBD.php';
@@ -96,10 +81,7 @@ class Usuario
             die("Connection failed: " . $conn->connect_error);
         }
 
-
        $sql = "INSERT INTO usuario (nome, cpf, dataNascimento, email, senha) VALUES ('" . $this->nome . "', '" . $this->cpf . "', '" . $this->dataNascimento . "', '" . $this->email . "','" . $this->senha . "')";
-
-
 
         // Verifica se a consulta foi bem-sucedida
         if ($conn->query($sql) === TRUE) {
@@ -111,9 +93,6 @@ class Usuario
             return FALSE;
         }
     }
-
-
-
 
     public function carregarUsuario($cpf)
     {
@@ -146,9 +125,6 @@ class Usuario
         }
     }
 
-
-
-
     public function atualizarBD()
     {
         require_once 'ConexaoBD.php';
@@ -158,9 +134,7 @@ class Usuario
             die("Connection failed: " . $conn->connect_error);
         }
 
-
         $sql = "UPDATE usuario SET nome = '" . $this->nome . "', cpf = '" . $this->cpf . "', dataNascimento = '" . $this->dataNascimento . "', email='" . $this->email . "' WHERE idusuario ='" . $this->id . "'";
-       
        
         if (
             $conn->query($sql) === TRUE

@@ -1,8 +1,4 @@
 <?php
-
-
-
-
 switch ($_POST) {
     //Caso a variavel seja nula mostrar tela de login
     case isset($_POST[null]):
@@ -20,8 +16,7 @@ switch ($_POST) {
         }
         break;
 
-
-    //---Primeiro Acesso--//
+    //---Redirecionar: Primeiro Acesso--//
     case isset($_POST["btnPrimeiroAcesso"]):
         include_once "../View/primeiroAcesso.php";
         break;
@@ -33,7 +28,7 @@ switch ($_POST) {
         if ($uController->inserir(
             $_POST["txtNome"],
             $_POST["txtCPF"],
-            date("Y-m-d", strtotime($_POST["DataNascimento"])), 
+            date("Y-m-d", strtotime($_POST["DataNascimento"])),
             $_POST["txtEmail"],
             $_POST["txtSenha"]
         )) {
@@ -50,7 +45,7 @@ switch ($_POST) {
         if ($uController->atualizar(
             $_POST["txtID"],
             $_POST["txtNome"],
-            $_POST["txtCPF"],        
+            $_POST["txtCPF"],
             $_POST["txtEmail"],
             date("Y-m-d", strtotime($_POST["txtData"]))
         )) {
@@ -62,7 +57,7 @@ switch ($_POST) {
 
     //--Adicionar Formacao--//
     case isset($_POST["btnAddFormacao"]):
-        require_once "../Controller/FormacaoAcadController.php";
+        require_once "../Controller/formacaoAcadController.php";
         include_once "../Model/Usuario.php";
         $fController = new FormacaoAcadController();
         if (
@@ -81,7 +76,7 @@ switch ($_POST) {
 
     //--Excluir Formacao-//
     case isset($_POST["btnExcluirFA"]):
-        require_once "../Controller/FormacaoAcadController.php";
+        require_once "../Controller/formacaoAcadController.php";
         include_once "../Model/Usuario.php";
         $fController = new FormacaoAcadController();
         if ($fController->remover($_POST["id"]) == true) {
@@ -91,13 +86,91 @@ switch ($_POST) {
         }
         break;
 
-    //-Cadastro Realizado -- //
-    case isset($_POST["btnCadRealizado"]):
-        include_once "../View/principal.php"; // talver trocar pra login.php
+    //--Adicionar Experiêcia Profissional--//
+    case isset($_POST["btnAddEP"]):
+        require_once "../Controller/experienciaProfController.php";
+        include_once "../Model/Usuario.php";
+        $eController = new ExperienciaProfController();
+        if (
+            $eController->inserir(
+                date("Y-m-d", strtotime($_POST["txtInicioEP"])), //
+                date("Y-m-d", strtotime($_POST["txtFimEP"])), //
+                $_POST["txtEmpEP"], //
+                $_POST["txtDescEP"], //
+                unserialize($_SESSION["Usuario"])->getID()
+            ) != false
+        ) {
+            include_once "../View/cadastroRealizado.php";
+        } else {
+            include_once "../View/cadastroNaoRealizado.php";
+        }
         break;
 
-    //-Cadastro Nao Realizado -- //
+    //--Excluir Experiêcia Profissional-//
+    case isset($_POST["btnExcluirEP"]): //
+        require_once "../Controller/experienciaProfController.php";
+        include_once "../Model/Usuario.php";
+        $eController = new ExperienciaProfController();
+        if ($eController->remover($_POST["id"]) == true) {
+            include_once "../View/informacaoExcluida.php";
+        } else {
+            include_once "../View/operacaoNaoRealizda.php";
+        }
+        break;
+
+    //--Adicionar Outras Formações--//
+    case isset($_POST["btnAddOF"]):
+        require_once "../Controller/outrasFormacoesController.php";
+        include_once "../Model/Usuario.php";
+        $oController = new OutrasFormacoesController();
+        if (
+            $oController->inserir(
+                date("Y-m-d", strtotime($_POST["txtInicioOF"])), //
+                date("Y-m-d", strtotime($_POST["txtFimOF"])), //
+                $_POST["txtDescOF"], //
+                unserialize($_SESSION["Usuario"])->getID()
+            ) != false
+        ) {
+            include_once "../View/cadastroRealizado.php";
+        } else {
+            include_once "../View/cadastroNaoRealizado.php";
+        }
+        break;
+
+    //--Excluir Outras Formações-//
+    case isset($_POST["btnExcluirOF"]): //
+        require_once "../Controller/outrasFormacoesController.php";
+        include_once "../Model/Usuario.php";
+        $oController = new OutrasFormacoesController();
+        if ($oController->remover($_POST["id"]) == true) {
+            include_once "../View/informacaoExcluida.php";
+        } else {
+            include_once "../View/operacaoNaoRealizda.php";
+        }
+        break;
+
+    //-Redirecionar: Cadastro Realizado -- //
+    case isset($_POST["btnCadRealizado"]):
+        include_once "../View/principal.php";
+        break;
+
+    //-Redirecionar: Cadastro Nao Realizado -- //
     case isset($_POST["btnCadNaoRealizado"]):
         include_once "../View/primeiroAcesso.php";
+        break;
+
+    //-Redirecionar: Informação Inserida -- //
+    case isset($_POST["btnInfInserir"]):
+        include_once "../View/principal.php";
+        break;
+
+    //-Redirecionar: Informação Excluida -- //
+    case isset($_POST["btnInfExcluir"]):
+        include_once "../View/principal.php";
+        break;
+
+    //-Redirecionar: Atualizar -- //
+    case isset($_POST["btnAtualizacaoCadastro"]):
+        include_once "../View/principal.php";
         break;
 }

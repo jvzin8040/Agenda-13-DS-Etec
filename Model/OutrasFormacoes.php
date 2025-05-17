@@ -8,8 +8,6 @@ class OutrasFormacoes
     private $fim;
     private $descricao;
 
-
-
     //ID
     public function setID($id)
     {
@@ -19,8 +17,6 @@ class OutrasFormacoes
     {
         return $this->id;
     }
-
-
 
     //idusuario
     public function setIdUsuario($idusuario)
@@ -32,8 +28,6 @@ class OutrasFormacoes
         return $this->idusuario;
     }
 
-
-
     //inicio
     public function setInicio($inicio)
     {
@@ -43,8 +37,6 @@ class OutrasFormacoes
     {
         return $this->inicio;
     }
-
-
 
     //fim
     public function setFim($fim)
@@ -56,8 +48,6 @@ class OutrasFormacoes
         return $this->fim;
     }
 
-
-
     //Descrição
     public function setDescricao($descricao)
     {
@@ -68,8 +58,6 @@ class OutrasFormacoes
         return $this->descricao;
     }
 
-
-
     public function inserirBD()
     {
         require_once 'ConexaoBD.php';
@@ -79,9 +67,7 @@ class OutrasFormacoes
             die("Connection failed: " . $conn->connect_error);
         }
 
-
         $sql = "INSERT INTO outrasformacoes (idusuario, inicio, fim, descricao)VALUES ('" . $this->idusuario . "','" . $this->inicio . "','" . $this->fim . "','" . $this->descricao . "')";
-
 
         if ($conn->query($sql) === true) {
             $this->id = mysqli_insert_id($conn);
@@ -93,10 +79,6 @@ class OutrasFormacoes
         }
     }
 
-
-
-
-
     public function excluirBD($id)
     {
         require_once 'ConexaoBD.php';
@@ -106,9 +88,7 @@ class OutrasFormacoes
             die("Connection failed: " . $conn->connect_error);
         }
 
-
         $sql = "DELETE FROM outrasformacoes WHERE idoutrasformacoes = '" . $id . "';";
-
 
         if ($conn->query($sql) === true) {
             $conn->close();
@@ -119,7 +99,6 @@ class OutrasFormacoes
         }
     }
 
-
     public function listaFormacoes($idusuario)
     {
         require_once 'ConexaoBD.php';
@@ -129,9 +108,8 @@ class OutrasFormacoes
             die("Connection failed: " . $conn->connect_error);
         }
 
-
         $sql = "SELECT * FROM outrasformacoes WHERE idusuario = '" . $idusuario . "'";
-
+        
         $re = $conn->query($sql);
         $conn->close();
         return $re;

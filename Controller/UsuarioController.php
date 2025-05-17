@@ -18,7 +18,6 @@ class UsuarioController
         return $r;
     }
 
- 
     public function atualizar($id, $nome, $cpf, $email, $dataNascimento)
     {
         require_once '../Model/Usuario.php';

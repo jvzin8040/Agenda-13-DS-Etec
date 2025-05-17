@@ -4,7 +4,6 @@ if (!isset($_SESSION)) {
 }
 class FormacaoAcadController
 {
- 
     public function inserir($inicio, $fim, $descricao, $idusuario)
     {
         require_once '../Model/FormacaoAcad.php';
@@ -31,5 +30,4 @@ class FormacaoAcadController
         $formacao = new FormacaoAcad();
         return $results = $formacao->listaFormacoes($idusuario);
     }
-
 }

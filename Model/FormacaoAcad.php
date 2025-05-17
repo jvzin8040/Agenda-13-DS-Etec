@@ -8,8 +8,6 @@ class FormacaoAcad
     private $fim;
     private $descricao;
 
-
-
     //ID
     public function setID($id)
     {
@@ -19,8 +17,6 @@ class FormacaoAcad
     {
         return $this->id;
     }
-
- 
 
     //idusuario
     public function setIdUsuario($idusuario)
@@ -32,8 +28,6 @@ class FormacaoAcad
         return $this->idusuario;
     }
 
-
-
     //inicio
     public function setInicio($inicio)
     {
@@ -43,8 +37,6 @@ class FormacaoAcad
     {
         return $this->inicio;
     }
-
-
 
     //fim
     public function setFim($fim)
@@ -56,8 +48,6 @@ class FormacaoAcad
         return $this->fim;
     }
 
-
-
     //Descrição
     public function setDescricao($descricao)
     {
@@ -67,7 +57,6 @@ class FormacaoAcad
     {
         return $this->descricao;
     }
-
 
 
     public function inserirBD()
@@ -93,10 +82,6 @@ class FormacaoAcad
         }
     }
 
-
-
-
-
     public function excluirBD($id)
     {
         require_once 'ConexaoBD.php';
@@ -106,9 +91,7 @@ class FormacaoAcad
             die("Connection failed: " . $conn->connect_error);
         }
 
-
         $sql = "DELETE FROM formacaoacademica WHERE idformacaoAcademica = '" . $id . "';";
-
 
         if ($conn->query($sql) === true) {
             $conn->close();
@@ -119,7 +102,6 @@ class FormacaoAcad
         }
     }
 
-
     public function listaFormacoes($idusuario)
     {
         require_once 'ConexaoBD.php';
@@ -129,7 +111,6 @@ class FormacaoAcad
             die("Connection failed: " . $conn->connect_error);
         }
 
-
         $sql = "SELECT * FROM formacaoacademica WHERE idusuario = '" . $idusuario . "'";
        
        // essa linha de verificação é diferente das outras
@@ -137,9 +118,5 @@ class FormacaoAcad
         $conn->close();
         return $re;
     }
-
-
-
-
 
 }

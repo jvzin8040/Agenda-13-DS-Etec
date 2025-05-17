@@ -32,13 +32,16 @@
 
     <?php
     include_once '../Controller/FormacaoAcadController.php';
-    include_once '../Model/Usuario.php'; // foreign
+    include_once '../Controller/experienciaProfController.php';
+    include_once '../Controller/outrasFormacoesController.php';
+    include_once '../Model/Usuario.php'; 
     if (!isset($_SESSION)) {
         session_start();
     }
     ?>
 
-    <nav class="w3-sidebar w3-bar-block w3-center w3-blue ">
+    <nav class="w3-sidebar w3-bar-block w3-center w3-blue">
+        <br>
         <a href="#home" class="w3-bar-item w3-button w3-block n w3-cell w3-hover-light-grey w3-hover-text-cyan w3-textlight-grey">
             <i class="fa fa-home w3-xxlarge"></i>
             <p>Início</p>
@@ -61,7 +64,6 @@
         </a>
     </nav>
 
-
     <div class="w3-padding-large" id="main">
         <header class="w3-container w3-padding-32 w3-center " id="home">
             <h1>
@@ -74,13 +76,10 @@
         </header>
     </div>
 
-
-    <div class="w3-padding-128 w3-content w3-text-grey" id="dPessoais ">
-        <h2 class="w3-text-cyan">Dados Pessoais</h2>
-
-
-
 <!-- Formulário 1 -->
+    <div class="w3-padding-128 w3-content w3-text-grey" style="width: 700px;">
+        <h2 class="w3-text-cyan" id="dPessoais">Dados Pessoais</h2>
+
         <form action="../Controller/Navegacao.php" method="post" class="w3-light-grey w3-text-blue w3-margin" style="width: 700px; padding: 20px; border-radius: 10px;">
             <input class="w3-input w3-border w3-round-large" name="txtID" type="hidden" value="<?php echo unserialize($_SESSION['Usuario'])->getID(); ?>">
             <div class="w3-row w3-section">
@@ -94,7 +93,7 @@
                 </div>
                 <div class="w3-row w3-margin-bottom">
                     <i class="w3-xxlarge fa fa-address-card w3-col" style="width: 15%;"></i>
-                    <input class="w3-input w3-border w3-round-large w3-col" style="width: 85%;" name="txtCPF" type="text" placeholder="Documento" value="<?php echo unserialize($_SESSION['Usuario'])->getCPF(); ?>">
+                    <input class="w3-input w3-border w3-round-large w3-col" style="width: 85%;" name="txtCPF" type="number" placeholder="Documento" value="<?php echo unserialize($_SESSION['Usuario'])->getCPF(); ?>">
 
                 </div>
                 <div class="w3-row w3-margin-bottom">
@@ -106,12 +105,10 @@
         </form>
     </div>
 
-
-
     <!-- Formação -->
-    <div class="w3-padding-128 w3-content w3-text-grey" id="formacao">
+    <div class="w3-padding-128 w3-content w3-text-grey" id="formacao" >
         <h2 class="w3-text-cyan">Formação</h2>
-        <form action="" method="post" class="w3-round-large w3-row w3-light-grey w3-text-blue w3-margin w3-padding-large" style="width:70%;">
+        <form action="../Controller/Navegacao.php" method="post" class="w3-round-large w3-row w3-light-grey w3-text-blue w3-margin w3-padding-large " >
             <div class="w3-row w3-center">
                 <div class="w3-col" style="width:50%;">
                     Data Inicial
@@ -177,26 +174,26 @@
                                     echo '<td style="width: 10%;">' . $row->fim . '</td>';
                                     echo '<td style="width: 65%;">' . $row->descricao . '</td>';
                                     echo '<td style="width: 5%;">
-                                    <form action="/Controller/Navegacao.php" method="post">
-                                    <input type="hidden" name="id" value="' . $row->idformacaoAcademica . '">
-<button name="btnExcluirFA" class="w3-button w3-block w3-blue
-w3-cell w3-round-large"><i class="fa fa-user-times"></i> </button></td>
-</form>';
+                                    <form action="../Controller/Navegacao.php" method="post">
+                                     <input type="hidden" name="id" value="' . $row->idformacaoAcademica . '">
+                                        <button name="btnExcluirFA" class="w3-button w3-block w3-blue
+                                        w3-cell w3-round-large"><i class="fa fa-user-times"></i> </button></td>
+                                     </input>
+                                    </form>';
                                     echo '</tr>';
                                 }
                             ?>
                         </thead>
+                    </thead>
             </table>
         </div>
     </div>
     </div>
 
-
-
     <!-- Experiência Profissional -->
     <div class="w3-padding-128 w3-content w3-text-grey" id="experiencia">
         <h2 class="w3-text-cyan">Experiência Profissional</h2>
-        <form action="" method="post" class="w3-round-large w3-row w3-light-grey w3-text-blue w3-margin w3-padding-large" style="width:70%;">
+        <form action="" method="post" class="w3-round-large w3-row w3-light-grey w3-text-blue w3-margin w3-padding-large">
             <div class="w3-row w3-center">
                 <div class="w3-col" style="width:50%;">
                     Data Inicial
@@ -263,20 +260,39 @@ w3-cell w3-round-large"><i class="fa fa-user-times"></i> </button></td>
                         <th>Descrição</th>
                         <th>Apagar</th>
                     </tr>
-                    <thead></thead>
+                     <thead>
+                        <thead>
+                            <?php
+                            $fCon = new ExperienciaProfController();
+                            $results = $fCon->gerarLista(unserialize($_SESSION['Usuario'])->getID());
+                            if ($results != null)
+                                while ($row = $results->fetch_object()) {
+                                    echo '<tr>';
+                                    echo '<td style="width: 10%;">' . $row->inicio . '</td>';
+                                    echo '<td style="width: 10%;">' . $row->fim . '</td>';
+                                    echo '<td style="width: 30%;">' . $row->empresa . '</td>';
+                                    echo '<td style="width: 30%;">' . $row->descricao . '</td>';
+                                    echo '<td style="width: 5%;">
+                                    <form action="../Controller/Navegacao.php" method="post">
+                                     <input type="hidden" name="id" value="' . $row->idexperienciaprofissional . '">
+                                        <button name="btnExcluirEP" class="w3-button w3-block w3-blue
+                                        w3-cell w3-round-large"><i class="fa fa-user-times"></i> </button></td>
+                                     </input>
+                                    </form>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                        </thead>
+                    </thead>
             </table>
         </div>
     </div>
     </div>
 
-
-
-
-
     <!-- Outras Formações -->
     <div class="w3-padding-128 w3-content w3-text-grey w3" id="outrasforms">
         <h2 class="w3-text-cyan">Outras Formações</h2>
-        <form action="" method="post" class="w3-round-large w3-row w3-light-grey w3-text-blue w3-margin w3-padding-large" style="width:70%;">
+        <form action="" method="post" class="w3-round-large w3-row w3-light-grey w3-text-blue w3-margin w3-padding-large"> 
             <div class="w3-row w3-center">
                 <div class="w3-col" style="width:50%;">
                     Data Inicial
@@ -330,10 +346,34 @@ w3-cell w3-round-large"><i class="fa fa-user-times"></i> </button></td>
                         <th>Descrição</th>
                         <th>Apagar</th>
                     </tr>
-                    <thead></thead>
+                     <thead>
+                        <thead>
+                            <?php 
+                            $fCon = new OutrasFormacoesController();    
+                            $results = $fCon->gerarLista(unserialize($_SESSION['Usuario'])->getID());
+                            if ($results != null)
+                                while ($row = $results->fetch_object()) {
+                                    echo '<tr>';
+                                    echo '<td style="width: 10%;">' . $row->inicio . '</td>';
+                                    echo '<td style="width: 10%;">' . $row->fim . '</td>';
+                                    echo '<td style="width: 65%;">' . $row->descricao . '</td>';
+                                    echo '<td style="width: 5%;">
+                                    <form action="../Controller/Navegacao.php" method="post">
+                                     <input type="hidden" name="id" value="' . $row->idoutrasformacoes . '">
+                                        <button name="btnExcluirOF" class="w3-button w3-block w3-blue
+                                        w3-cell w3-round-large"><i class="fa fa-user-times"></i> </button></td>
+                                     </input>
+                                    </form>';
+                                    echo '</tr>';
+                                } 
+                            ?>
+                        </thead>
+                    </thead>
             </table>
         </div>
     </div>
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 </body>
 
