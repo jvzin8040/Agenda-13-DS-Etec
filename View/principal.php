@@ -90,7 +90,7 @@
                 </div>
                 <div class="w3-row w3-margin-bottom">
                     <i class="w3-xxlarge fa fa-calendar w3-col" style="width: 15%;"></i>
-                    <input class="w3-input w3-border w3-round-large w3-col" style="width: 85%;" name="txtData" type="text" placeholder="dd/mm/aaaa" value="<?php echo unserialize($_SESSION['Usuario'])->getDataNascimento(); ?>">
+                    <input class="w3-input w3-border w3-round-large w3-col" style="width: 85%;" name="txtData" type="date" placeholder="dd/mm/aaaa" value="<?php echo unserialize($_SESSION['Usuario'])->getDataNascimento(); ?>">
                 </div>
                 <div class="w3-row w3-margin-bottom">
                     <i class="w3-xxlarge fa fa-address-card w3-col" style="width: 15%;"></i>

@@ -20,7 +20,7 @@
     <div class="w3-row w3-section">
         <div class="w3-col" style="width:11%"><i class="w3-xxlarge fa fa-user"></i></div>
         <div class="w3-rest">
-            <input class="w3-input w3-border w3-round-large" name="txtLogin" type="text" placeholder="Login CPF (ex.: 33333333333)">
+            <input class="w3-input w3-border w3-round-large" name="txtLogin" type="number" placeholder="Login CPF (ex.: 33333333333)">
         </div>
     </div>
     <div class="w3-row w3-section">

@@ -49,8 +49,8 @@ switch ($_POST) {
         $uController = new UsuarioController();
         if ($uController->atualizar(
             $_POST["txtID"],
-            $_POST["txtCPF"],
             $_POST["txtNome"],
+            $_POST["txtCPF"],        
             $_POST["txtEmail"],
             date("Y-m-d", strtotime($_POST["txtData"]))
         )) {
@@ -91,9 +91,9 @@ switch ($_POST) {
         }
         break;
 
-    //-Cadastro Raalizado -- //
+    //-Cadastro Realizado -- //
     case isset($_POST["btnCadRealizado"]):
-        include_once "../View/principal.php";
+        include_once "../View/principal.php"; // talver trocar pra login.php
         break;
 
     //-Cadastro Nao Realizado -- //

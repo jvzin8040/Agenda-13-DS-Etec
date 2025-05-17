@@ -20,7 +20,7 @@ class FormacaoAcad
         return $this->id;
     }
 
-
+ 
 
     //idusuario
     public function setIdUsuario($idusuario)

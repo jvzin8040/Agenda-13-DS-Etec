@@ -29,9 +29,20 @@
         </div>
         <div class="w3-rest">
             <input class="w3-input w3-border w3-round-large" name="txtCPF"
-                type="text" placeholder="CPF: 33333333333">
+                type="number" placeholder="CPF: 33333333333">
         </div>
     </div>
+
+  <div class="w3-row w3-section">
+        <div class="w3-col" style="width:11%;">
+            <i class="w3-xxlarge fa fa-calendar w3-col"></i>
+        </div>
+        <div class="w3-rest">
+            <input class="w3-input w3-border w3-round-large" name="DataNascimento" type="date"
+                placeholder="Data de Nascimento">
+        </div>
+    </div>
+
     <div class="w3-row w3-section">
         <div class="w3-col" style="width:11%;">
             <i class="w3-xxlarge fa fa-envelope-o"></i>
