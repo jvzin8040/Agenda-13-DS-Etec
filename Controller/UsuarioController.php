@@ -4,12 +4,13 @@ if (!isset($_SESSION)) {
 }
 class UsuarioController
 {
-    public function inserir($nome, $cpf, $email, $senha)
+    public function inserir($nome, $cpf, $dataNascimento, $email, $senha)
     {
         require_once '../Model/Usuario.php';
         $usuario = new Usuario();
         $usuario->setNome($nome);
         $usuario->setCPF($cpf);
+        $usuario->setDataNascimento($dataNascimento);
         $usuario->setEmail($email);
         $usuario->setSenha($senha);
         $r = $usuario->inserirBD();
@@ -27,6 +28,8 @@ class UsuarioController
         $usuario->setCPF($cpf);
         $usuario->setEmail($email);
         $usuario->setDataNascimento($dataNascimento);
+
+
         $r = $usuario->atualizarBD();
         $_SESSION['Usuario'] = serialize($usuario);
         return $r;

@@ -1,10 +1,7 @@
 <?php
 
 
-if (empty($_POST)) {
-    include_once "../View/login.php";
-    exit();
-}
+
 
 switch ($_POST) {
     //Caso a variavel seja nula mostrar tela de login
@@ -36,6 +33,7 @@ switch ($_POST) {
         if ($uController->inserir(
             $_POST["txtNome"],
             $_POST["txtCPF"],
+            date("Y-m-d", strtotime($_POST["DataNascimento"])), 
             $_POST["txtEmail"],
             $_POST["txtSenha"]
         )) {
@@ -51,8 +49,8 @@ switch ($_POST) {
         $uController = new UsuarioController();
         if ($uController->atualizar(
             $_POST["txtID"],
-            $_POST["txtNome"],
             $_POST["txtCPF"],
+            $_POST["txtNome"],
             $_POST["txtEmail"],
             date("Y-m-d", strtotime($_POST["txtData"]))
         )) {
@@ -91,5 +89,15 @@ switch ($_POST) {
         } else {
             include_once "../View/operacaoNaoRealizda.php";
         }
+        break;
+
+    //-Cadastro Raalizado -- //
+    case isset($_POST["btnCadRealizado"]):
+        include_once "../View/principal.php";
+        break;
+
+    //-Cadastro Nao Realizado -- //
+    case isset($_POST["btnCadNaoRealizado"]):
+        include_once "../View/primeiroAcesso.php";
         break;
 }

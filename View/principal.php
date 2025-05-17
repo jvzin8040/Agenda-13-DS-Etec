@@ -80,7 +80,7 @@
 
 
 
-
+<!-- Formulário 1 -->
         <form action="../Controller/Navegacao.php" method="post" class="w3-light-grey w3-text-blue w3-margin" style="width: 700px; padding: 20px; border-radius: 10px;">
             <input class="w3-input w3-border w3-round-large" name="txtID" type="hidden" value="<?php echo unserialize($_SESSION['Usuario'])->getID(); ?>">
             <div class="w3-row w3-section">
@@ -94,7 +94,7 @@
                 </div>
                 <div class="w3-row w3-margin-bottom">
                     <i class="w3-xxlarge fa fa-address-card w3-col" style="width: 15%;"></i>
-                    <input class="w3-input w3-border w3-round-large w3-col" style="width: 85%;" name="txtDocumento" type="text" placeholder="Documento" value="<?php echo unserialize($_SESSION['Usuario'])->getCPF(); ?>">
+                    <input class="w3-input w3-border w3-round-large w3-col" style="width: 85%;" name="txtCPF" type="text" placeholder="Documento" value="<?php echo unserialize($_SESSION['Usuario'])->getCPF(); ?>">
 
                 </div>
                 <div class="w3-row w3-margin-bottom">

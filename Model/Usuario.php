@@ -97,7 +97,8 @@ class Usuario
         }
 
 
-        $sql = "INSERT INTO usuario (nome, cpf, email, senha)VALUES ('" . $this->nome . "', '" . $this->cpf . "', '" . $this->email . "','" . $this->senha . "')";
+       $sql = "INSERT INTO usuario (nome, cpf, dataNascimento, email, senha) VALUES ('" . $this->nome . "', '" . $this->cpf . "', '" . $this->dataNascimento . "', '" . $this->email . "','" . $this->senha . "')";
+
 
 
         // Verifica se a consulta foi bem-sucedida
