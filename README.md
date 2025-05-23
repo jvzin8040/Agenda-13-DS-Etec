@@ -1,6 +1,3 @@
-
-
-
    <h1>📒 Agenda 13 - DS Etec</h1>
     <p>Este repositório contém a atividade da <strong>Agenda 13</strong> do curso de <strong>Desenvolvimento de Sistemas</strong> da <strong>Etec</strong>.</p>
 
